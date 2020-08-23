@@ -21,6 +21,8 @@
 		C378606A24EAA844002320BD /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C378606924EAA844002320BD /* Statistic.swift */; };
 		C378607224EAD526002320BD /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = C378607124EAD526002320BD /* Statistics.swift */; };
 		C378607624EB9F2E002320BD /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = C378607524EB9F2E002320BD /* Information.swift */; };
+		C39C52DA24F1D05600CCAD46 /* 1200px-Cat_November_2010-1a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C39C52B924F1D05600CCAD46 /* 1200px-Cat_November_2010-1a.jpg */; };
+		C39C52EE24F1D05700CCAD46 /* AdorableKittenEmbrace.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C39C52CD24F1D05600CCAD46 /* AdorableKittenEmbrace.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		C378606924EAA844002320BD /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
 		C378607124EAD526002320BD /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		C378607524EB9F2E002320BD /* Information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
+		C39C52B924F1D05600CCAD46 /* 1200px-Cat_November_2010-1a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "1200px-Cat_November_2010-1a.jpg"; sourceTree = "<group>"; };
+		C39C52CD24F1D05600CCAD46 /* AdorableKittenEmbrace.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = AdorableKittenEmbrace.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 				C378604B24EA164C002320BD /* Assets.xcassets */,
 				C378604D24EA164C002320BD /* LaunchScreen.storyboard */,
 				C378605024EA164C002320BD /* Info.plist */,
+				C39C52B424F1D05600CCAD46 /* Cats */,
 			);
 			path = CatFacts;
 			sourceTree = "<group>";
@@ -120,6 +125,15 @@
 				C378605B24EA164C002320BD /* Info.plist */,
 			);
 			path = CatFactsTests;
+			sourceTree = "<group>";
+		};
+		C39C52B424F1D05600CCAD46 /* Cats */ = {
+			isa = PBXGroup;
+			children = (
+				C39C52B924F1D05600CCAD46 /* 1200px-Cat_November_2010-1a.jpg */,
+				C39C52CD24F1D05600CCAD46 /* AdorableKittenEmbrace.jpg */,
+			);
+			path = Cats;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +217,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C39C52EE24F1D05700CCAD46 /* AdorableKittenEmbrace.jpg in Resources */,
 				C378604F24EA164C002320BD /* LaunchScreen.storyboard in Resources */,
+				C39C52DA24F1D05600CCAD46 /* 1200px-Cat_November_2010-1a.jpg in Resources */,
 				C378604C24EA164C002320BD /* Assets.xcassets in Resources */,
 				C378604A24EA1646002320BD /* Main.storyboard in Resources */,
 			);
@@ -394,6 +410,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CatFacts/CatFacts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = M46JGTF7G6;
 				INFOPLIST_FILE = CatFacts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -414,6 +431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CatFacts/CatFacts.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = M46JGTF7G6;
 				INFOPLIST_FILE = CatFacts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

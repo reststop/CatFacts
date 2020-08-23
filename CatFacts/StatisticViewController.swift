@@ -28,7 +28,7 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
 
     static let statisticsUpdated = Notification.Name("")
 
-    @IBOutlet var statisticsTable : UITableView?
+    @IBOutlet var statisticsTable : UITableView!
 
     let PLACEHOLDER_NAME = "unknown"
     var count = 1
@@ -51,13 +51,16 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         Statistics.update(name: "Current Memory", value: Information.megabytesUsed())
 
 
+        // make tbleview clear
+        self.statisticsTable.backgroundColor = UIColor.clear
+
         // (optional) include this line if you want to remove the extra empty cell divider lines
-        self.statisticsTable?.tableFooterView = UIView()
+        self.statisticsTable.tableFooterView = UIView()
 
         // This view controller itself will provide the delegate
         // methods and row data for the table view.
-        self.statisticsTable?.delegate = self
-        self.statisticsTable?.dataSource = self
+        self.statisticsTable.delegate = self
+        self.statisticsTable.dataSource = self
     }
 
 
@@ -65,7 +68,7 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidAppear(animated)
         // Do any additional setup after loading the view.
 
-        self.statisticsTable!.reloadData()
+        self.statisticsTable.reloadData()
 
         // set observer for notifications of table updates
         NotificationCenter.default.addObserver(self, selector: #selector(statisticsUpdated(_:)), name: .statisticsUpdated, object: nil)
@@ -77,7 +80,7 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @objc func statisticsUpdated(_: Notification) {
         DispatchQueue.main.async{
-            self.statisticsTable?.reloadData()
+            self.statisticsTable.reloadData()
         }
     }
 
@@ -91,6 +94,8 @@ class StatisticViewController: UIViewController, UITableViewDelegate, UITableVie
 
         // create a new cell if needed or reuse an old one
         let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as! StatisticViewCell
+
+        cell.backgroundColor = UIColor.clear
 
         let row = indexPath.row
         let stats : [Statistic] = Statistics.shared.statistics

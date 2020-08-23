@@ -22,7 +22,8 @@ class BreedViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     var breeds : [Breed?] = []
 
-    @IBOutlet var breedTable : UITableView?
+    @IBOutlet var breedTable : UITableView!
+    @IBOutlet var breedImageView: UIImageView!
 
     var activity : UIActivityIndicatorView = UIActivityIndicatorView()
 
@@ -37,7 +38,7 @@ class BreedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     self.breeds.append(element)
                     // try reloading only updated rows
                     DispatchQueue.main.async{
-                        self.breedTable?.reloadData()
+                        self.breedTable.reloadData()
                     }
                 }
                 else {
@@ -46,7 +47,7 @@ class BreedViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     if self.breeds.count > index {
                         self.breeds[index] = element
                         DispatchQueue.main.async{
-                            self.breedTable?.reloadData()
+                            self.breedTable.reloadData()
                         }
                     }
                     else {
@@ -80,7 +81,7 @@ class BreedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         })
 
         self.activity.stopAnimating()
-        self.breedTable?.reloadData()
+        self.breedTable.reloadData()
     }
 
 
@@ -104,16 +105,19 @@ class BreedViewController: UIViewController, UITableViewDelegate, UITableViewDat
             Statistics.reset()
         }
 
+        // make tbleview clear
+        self.breedTable.backgroundColor = UIColor.clear
+
         // Register the table view cell class and its reuse id
-        self.breedTable?.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.breedTable.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
 
         // (optional) include this line if you want to remove the extra empty cell divider lines
-        self.breedTable?.tableFooterView = UIView()
+        self.breedTable.tableFooterView = UIView()
 
         // This view controller itself will provide the delegate
         // methods and row data for the table view.
-        self.breedTable?.delegate = self
-        self.breedTable?.dataSource = self
+        self.breedTable.delegate = self
+        self.breedTable.dataSource = self
 
         // initially breeds array will be empty
         // while testing, it contains some canned data
@@ -126,7 +130,7 @@ class BreedViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidAppear(animated)
         // Do any additional setup after loading the view.
 
-        self.breedTable?.reloadData()
+        self.breedTable.reloadData()
 
 //        while self.breeds.count < BreedData.totalBreeds {
 //            self.loadBreeds(page: 0)
@@ -168,7 +172,10 @@ class BreedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         // create a new cell if needed or reuse an old one
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) 
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
+
+        // use clear background on cells
+        cell.backgroundColor = UIColor.clear
 
         let row = indexPath.row
         self.lastDisplayedIndexPath = indexPath
