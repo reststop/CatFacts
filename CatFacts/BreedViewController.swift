@@ -30,52 +30,52 @@ class BreedViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func loadBreeds(page: Int) -> Void {
         self.activity.startAnimating()
         BreedData.fetchPage(myPage: page, completion: { (from, results, error) in
-          if error == nil {
-            var index = from - 1
-            for element in results {
-                // if we are expanding breeds using .append at any index
-                if self.breeds.count == index {
-                    self.breeds.append(element)
-                    // try reloading only updated rows
-                    DispatchQueue.main.async{
-                        self.breedTable.reloadData()
-                    }
-                }
-                else {
-                    // if we are refreshing or replacing existing index
-                    // it might have been change to nil, or same data
-                    if self.breeds.count > index {
-                        self.breeds[index] = element
+            if error == nil {
+                var index = from - 1
+                for element in results {
+                    // if we are expanding breeds using .append at any index
+                    if self.breeds.count == index {
+                        self.breeds.append(element)
+                        // try reloading only updated rows
                         DispatchQueue.main.async{
                             self.breedTable.reloadData()
                         }
                     }
                     else {
-                        // we seem to be someplace else
-                        // let's ignore this for now
-                        print("Attempt to insert to breeds at \(index) while \(self.breeds.count) entries")
+                        // if we are refreshing or replacing existing index
+                        // it might have been change to nil, or same data
+                        if self.breeds.count > index {
+                            self.breeds[index] = element
+                            DispatchQueue.main.async{
+                                self.breedTable.reloadData()
+                            }
+                        }
+                        else {
+                            // we seem to be someplace else
+                            // let's ignore this for now
+                            print("Attempt to insert to breeds at \(index) while \(self.breeds.count) entries")
+                        }
                     }
+                    index += 1
                 }
-                index += 1
+
+                Statistics.update(name: "Total Cat Breeds", value: String(self.breeds.count))
+                if self.breeds.count < BreedData.totalBreeds {
+                    // add a fake empty record if there's still more to come
+                    self.breeds.append(nil)
+                }
             }
+            else {
+                DispatchQueue.main.async{
 
-            Statistics.update(name: "Total Cat Breeds", value: String(self.breeds.count))
-            if self.breeds.count < BreedData.totalBreeds {
-                // add a fake empty record if there's still more to come
-                self.breeds.append(nil)
-            }
-          }
-          else {
-            DispatchQueue.main.async{
+                    // we got an error
+                    print("----We got an error:----")
+                    print(error as Any)
+                    let alert = UIAlertController(title: "Error:", message: (error?.localizedDescription ?? "Unknown Internet Error") as String, preferredStyle: .alert)
 
-                // we got an error
-                print("----We got an error:----")
-                print(error as Any)
-                let alert = UIAlertController(title: "Error:", message: (error?.localizedDescription ?? "Unknown Internet Error") as String, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
 
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-
-                self.present(alert, animated: true)
+                    self.present(alert, animated: true)
                 }
             }
         })

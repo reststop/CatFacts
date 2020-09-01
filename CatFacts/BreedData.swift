@@ -62,26 +62,26 @@ class BreedData {
         if let url = URL(string: urlString) {
             let begin = NSDate.now
             URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-              if error == nil {
-                let timer = NSDate.now
-                let statData = String(format: "%.3f", timer.timeIntervalSince(begin) * 1000.0)
-                Statistics.update(name: statName, value: statData)
-                if let data = data {
-                  do {
-                    let res = try JSONDecoder().decode(myBreeds.self, from: data)
-                    let theBreeds : [Breed] = res.data
-                    totalBreeds = res.total
-                    completion(res.from, theBreeds, error)
-
-                  } catch let error {
-                     print(error)
-                  }
-               }
-              }
-              else {
-                completion(0, [], error)
-              }
-           }).resume()
+                if error == nil {
+                    let timer = NSDate.now
+                    let statData = String(format: "%.3f", timer.timeIntervalSince(begin) * 1000.0)
+                    Statistics.update(name: statName, value: statData)
+                    if let data = data {
+                        do {
+                            let res = try JSONDecoder().decode(myBreeds.self, from: data)
+                            let theBreeds : [Breed] = res.data
+                            totalBreeds = res.total
+                            completion(res.from, theBreeds, error)
+                            
+                        } catch let error {
+                            print(error)
+                        }
+                    }
+                }
+                else {
+                    completion(0, [], error)
+                }
+            }).resume()
         }
     }
 
